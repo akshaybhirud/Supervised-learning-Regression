@@ -1,0 +1,32 @@
+ALL IN ONE REGRESSION CHEAT SHEET
+---------------------------------
+* 3 X predictors - wt, disp, hp . Y value - mpg
+STEP 1 - CHECK FOR EXTENT OF CORRELATION
+* Run Prediction model. Add x var one by one, keep checking Adj R square
+* Check when Adj r square is highest, with that x combination
+* wt has highest influence on mpg, with high m value (-3.8009)
+* disp has least influence on mpg, with low m value (-0.0009)
+* disp is a good candidate for elimination from the model
+
+STEP 2 - CHECK FOR OUTLIERS
+* Outliers are values farther than 1.5 times the IQR.
+* Another method - Calculate outliers for each x parameter using studentised residuals
+* If studentized residuals > 3 that x is an outlier with high leverage.
+* Remove those x values
+
+STEP 3 - CHECK FOR MULTI-COLLINEARITY
+* Find corr-coef between x1 <> x2, x1 <> x3 , x2 <> x3
+* Calculate VIF for each x
+* If VIF > 5, to be removed or modified
+* Calculate VIF after dropping. Repeat until free of multi-collinearity
+
+STEP 4 - RESIDUAL ERROR MUST BE NORMALLY DISTRIBUTED
+* We use Shapiro Wilk test  from scipy library.
+* Find p-value for NULL HYPOTHESIS (Yes, normally distributed)
+* If p-value > 0.05, accept null hypotehsis
+* Cross check using Probability plot. Here the residuals will be represented as dots (in blue) should fall on the red line.
+
+STEP 5 - CHECK FOR AUTO-CORRELATION
+* Test can be skipped when there is no time stamp in the data
+* Check for absence of autocorrelation using Ljungbox test
+* Null Hypothesis: Autocorrelation is absent.
